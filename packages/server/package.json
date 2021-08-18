@@ -1,0 +1,103 @@
+{
+  "name": "@deboxsoft/lc-cashier-server",
+  "version": "1.0.0",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deboxsoft/lc-cashier",
+    "directory": "packages/server"
+  },
+  "maintainers": [
+    {
+      "name": "Nurdiansyah",
+      "email": "nur.diansyah.ckt@gmail.com"
+    }
+  ],
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "files": [
+    "*",
+    "!src",
+    "!tests"
+  ],
+  "scripts": {
+    "build": "run-p build:rollup build:tsc",
+    "build:rollup": "rollup -c",
+    "build:tsc": "rimraf types && tsc",
+    "lint": "eslint --fix 'src/**/*.ts'",
+    "test": "uvu -r ts-node/register",
+    "bump": "pnpm run build && bump",
+    "release:patch": "pnpm run bump -- patch -cp && pnpm publish",
+    "release:minor": "pnpm run bump -- minor -cp && pnpm publish",
+    "release:major": "pnpm run bump -- major -cp && pnpm publish",
+    "release:dev": "git add . && pnpm run bump -- -cp prerelease && pnpm publish --tag dev --no-git-checks"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@deboxsoft/lc-cashier-api": "workspace:~",
+    "node-cache-manager": "^1.2.0",
+    "p-map": "^5.0.0",
+    "p-queue": "^6.6.2"
+  },
+  "devDependencies": {
+    "@breejs/later": "^4.0.2",
+    "@changesets/cli": "^2.16.0",
+    "@deboxsoft/module-core": "~2.2.11",
+    "@deboxsoft/module-graphql": "~2.2.10",
+    "@deboxsoft/module-mongo": "~2.2.4",
+    "@deboxsoft/module-server": "~2.2.8",
+    "@deboxsoft/plop-generator": "^1.0.1-beta.15",
+    "@graphql-tools/merge": "6.2.5",
+    "@graphql-tools/utils": "7.0.2",
+    "@nurdiansyah/bump": "^6.1.2",
+    "@nurdiansyah/rollup": "^1.6.8",
+    "@types/mongodb": "^3.6.18",
+    "@types/node": "^14.14.31",
+    "ava": "^3.15.0",
+    "aws4": "^1.11.0",
+    "change-case": "^4.1.2",
+    "dayjs": "^1.10.5",
+    "graphql": "^15.4.0",
+    "mongodb": "^3.6.3",
+    "mongodb-client-encryption": "^1.2.5",
+    "mongodb-memory-server": "^6.9.3",
+    "mqemitter": "^4.4.1",
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.51.2",
+    "ts-node": "^10.0.0",
+    "tslib": "^2.2.0",
+    "typescript": "~4.2.0",
+    "utility-types": "^3.10.0",
+    "uvu": "^0.5.1"
+  },
+  "peerDependencies": {
+    "@breejs/later": "*",
+    "@graphql-tools/merge": "6.2.5",
+    "@graphql-tools/utils": "7.0.2",
+    "day-js": "*",
+    "graphql": "^15.4.0",
+    "mongodb": "^3.0.0",
+    "mqemitter": "*"
+  },
+  "peerDependenciesMeta": {
+    "graphql": {
+      "optional": true
+    },
+    "mongodb": {
+      "optional": true
+    }
+  },
+  "preferUnplugged": true,
+  "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
+}

@@ -1,0 +1,11 @@
+type Mutation {}
+type Query {}
+type Subscription
+type AccountAmount {
+  id: ID!
+  amount: Float!
+}
+input AccountAmountInput {
+  id: ID!
+  amount: Float!
+}

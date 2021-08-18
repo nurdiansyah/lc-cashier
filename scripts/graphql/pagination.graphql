@@ -1,0 +1,24 @@
+# Information about pagination in a connection.'
+type PageCursorInfo {
+  # total page.
+  total: Int
+
+  # When paginating forwards, are there more items?
+  hasNext: Boolean
+
+  # When paginating forwards, the cursor to continue.
+  next: ID
+
+  # When paginating backwards, are there more items?
+  hasPrevious: Boolean
+
+  # When paginating backwards, the cursor to continue.
+  previous: ID
+}
+
+input PageCursorParams {
+  limit: Int!
+  before: String
+  after: String
+  total: Int
+}
