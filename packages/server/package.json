@@ -34,9 +34,6 @@
     "lint": "eslint --fix 'src/**/*.ts'",
     "test": "uvu -r ts-node/register",
     "bump": "pnpm run build && bump",
-    "release:patch": "pnpm run bump -- patch -cp && pnpm publish",
-    "release:minor": "pnpm run bump -- minor -cp && pnpm publish",
-    "release:major": "pnpm run bump -- major -cp && pnpm publish",
     "release:dev": "git add . && pnpm run bump -- -cp prerelease && pnpm publish --tag dev --no-git-checks"
   },
   "publishConfig": {

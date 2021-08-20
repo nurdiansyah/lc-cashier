@@ -17,7 +17,9 @@
     "preinstall": "npx only-allow pnpm",
     "build": "bic",
     "plop-gen": "plop-gen && prettier -w 'packages/*/src/**/*'",
-    "release": "pnpm run build && changeset version && pnpm -r publish"
+    "version:patch": "pnpm run build && pnpm -r bump -- patch",
+    "version:minor": "pnpm run build && pnpm -r bump -- minor",
+    "version:major": "pnpm run build && pnpm -r bump -- major"
   },
   "workspaces": {
     "packages": [
