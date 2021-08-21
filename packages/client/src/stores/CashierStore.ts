@@ -1,6 +1,6 @@
 import type { PageCursorInfo } from "@deboxsoft/module-core";
 import type { Cashier, CashierFilter, CashierInput, CashierParams } from "@deboxsoft/lc-cashier-api";
-import type { LcCashierClientConfig, ItemDataOptions } from "../types";
+import type { LcCashierClientConfig, ItemDataOptions, FindOptions } from "../types";
 
 import { createCashierService } from "../services";
 import { writable, get, Readable, Writable } from "svelte/store";
@@ -14,7 +14,7 @@ export interface CashierContext {
   remove(id: string, options?: ItemDataOptions): Promise<void>;
   findById(id: string): Promise<Cashier | undefined>;
   find(filter?: CashierFilter): Promise<Cashier[]>;
-  findPage(params?: CashierParams): Promise<void>;
+  findPage(params?: CashierParams, options?: FindOptions): Promise<void>;
   getCashier(id: string): Cashier | undefined;
   cashierStore: Writable<Cashier[]>;
   cashierPageInfo: Readable<PageCursorInfo>;
@@ -88,15 +88,18 @@ export const createCashierContext = (options: Options): CashierContext => {
       });
     },
     find: (filter) => cashierService.find(filter),
-    findPage: (params: CashierParams) =>
+    findPage: (params: CashierParams, { more, backward }) =>
       cashierService.findPage(params).then((result) => {
         const data = result.data || [];
         const pageInfo = result.pageInfo;
         cashierStore.update(($cashierStore) => {
-          if (pageInfo?.hasPrevious) {
-            return [...data, ...$cashierStore];
+          if (more) {
+            if (backward) {
+              return [...data, ...$cashierStore];
+            }
+            return [...$cashierStore, ...data];
           }
-          return [...$cashierStore, ...data];
+          return data;
         });
         cashierPageInfo.set(pageInfo);
       }),

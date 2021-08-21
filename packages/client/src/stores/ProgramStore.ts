@@ -1,6 +1,6 @@
 import type { PageCursorInfo } from "@deboxsoft/module-core";
 import type { Program, ProgramFilter, ProgramInput, ProgramParams } from "@deboxsoft/lc-cashier-api";
-import type { LcCashierClientConfig, ItemDataOptions } from "../types";
+import type { LcCashierClientConfig, ItemDataOptions, FindOptions } from "../types";
 
 import { createProgramService } from "../services";
 import { writable, get, Readable, Writable } from "svelte/store";
@@ -14,7 +14,7 @@ export interface ProgramContext {
   remove(id: string, options?: ItemDataOptions): Promise<void>;
   findById(id: string): Promise<Program | undefined>;
   find(filter?: ProgramFilter): Promise<Program[]>;
-  findPage(params?: ProgramParams): Promise<void>;
+  findPage(params?: ProgramParams, options?: FindOptions): Promise<void>;
   getProgram(id: string): Program | undefined;
   programStore: Writable<Program[]>;
   programPageInfo: Readable<PageCursorInfo>;
@@ -88,15 +88,18 @@ export const createProgramContext = (options: Options): ProgramContext => {
       });
     },
     find: (filter) => programService.find(filter),
-    findPage: (params: ProgramParams) =>
+    findPage: (params: ProgramParams, { more, backward }) =>
       programService.findPage(params).then((result) => {
         const data = result.data || [];
         const pageInfo = result.pageInfo;
         programStore.update(($programStore) => {
-          if (pageInfo?.hasPrevious) {
-            return [...data, ...$programStore];
+          if (more) {
+            if (backward) {
+              return [...data, ...$programStore];
+            }
+            return [...$programStore, ...data];
           }
-          return [...$programStore, ...data];
+          return data;
         });
         programPageInfo.set(pageInfo);
       }),
