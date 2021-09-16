@@ -8,6 +8,8 @@ const CashierFragment = gql`
     student
     description
     debitAccount
+    amount
+    discount
   }
 `;
 
@@ -31,7 +33,7 @@ export const CreateCashierMutation = gql`
 `;
 
 export const UpdateCashierMutation = gql`
-  mutation update($id: ID!, $input: CashierInput!) {
+  mutation update($id: ID!, $input: CashierUpdateInput!) {
     updateCashier(id: $id, input: $input)
   }
 `;

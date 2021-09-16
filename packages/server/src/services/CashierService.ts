@@ -3,15 +3,19 @@ import { LcCashierModuleOptions } from "../types";
 import {
   CashierError,
   CashierEvent,
-  CashierInput,
   CashierParams,
   CashierService,
   Cashier,
   CashierFilter,
-  CashierInputSchema
+  CashierUpdateSchema,
+  CashierUpdateInput,
+  CashierCreateInput,
+  transformCashierToTransactionInput,
+  transformCashierToDataInput
 } from "@deboxsoft/lc-cashier-api";
 import { Container, Logger } from "@deboxsoft/module-core";
 import { getCashierRepo, CashierRepo } from "../db";
+import { getTransactionServiceServer, TransactionServiceServer } from "@deboxsoft/accounting-server";
 
 interface Options extends LcCashierModuleOptions {}
 
@@ -19,7 +23,8 @@ const KEY = Symbol("cashier-service-server");
 export const getCashierServiceServer = () => Container.get<CashierServiceServer>(KEY);
 export const createCashierServiceServer = (options: Options) => {
   const cashierRepo = getCashierRepo();
-  const cashierService = new CashierServiceServer(cashierRepo, options);
+  const transactionService = getTransactionServiceServer();
+  const cashierService = new CashierServiceServer(cashierRepo, transactionService, options);
   Container.set(KEY, cashierService);
   return cashierService;
 };
@@ -27,15 +32,30 @@ export const createCashierServiceServer = (options: Options) => {
 export class CashierServiceServer implements CashierService {
   event: MQEmitter;
   logger: Logger;
-  constructor(private cashierRepo: CashierRepo, options: Options) {
+  constructor(
+    private cashierRepo: CashierRepo,
+    private transactionService: TransactionServiceServer,
+    options: Options
+  ) {
     this.logger = options.logger;
     this.event = options.event;
   }
 
-  async create(input: CashierInput) {
+  async create(input: CashierCreateInput) {
     try {
-      input = CashierInputSchema.parse(input);
-      const { data } = await this.cashierRepo.create(input);
+      this.transactionService.startTransaction();
+      const transactionId = await this.transactionService.getId();
+      const transactionInput = transformCashierToTransactionInput.parse({
+        ...input,
+        transactionId
+      });
+      const dataInput = transformCashierToDataInput.parse({
+        ...input,
+        transactionId
+      });
+      const { data } = await this.cashierRepo.create(dataInput);
+      await this.transactionService.create(transactionInput);
+      await this.transactionService.commitTransaction();
       return this.findById(data).then((cashier) => {
         if (cashier) {
           this.event.emit({ topic: CashierEvent.created, data: cashier });
@@ -46,12 +66,16 @@ export class CashierServiceServer implements CashierService {
       });
     } catch (e) {
       this.logger.error("[CashierServiceServer] %o", e);
+      this.transactionService.rollbackTransaction();
       throw e;
+    } finally {
+      this.transactionService.endTransaction();
     }
   }
 
-  async update(id: string, input: Partial<CashierInput>) {
+  async update(id: string, input: CashierUpdateInput) {
     try {
+      input = CashierUpdateSchema.parse(input);
       const { data } = await this.cashierRepo.update(id, input);
       return this.findById(id, { detail: false }).then((cashier) => {
         if (cashier) {

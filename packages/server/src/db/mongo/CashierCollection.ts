@@ -1,13 +1,22 @@
 import { Collection, Db } from "mongodb";
 import { CashierRepo, CASHIER_REPO_KEY } from "../CashierRepo";
-import { Cashier, CashierError, CashierInput, CashierParams } from "@deboxsoft/lc-cashier-api";
+import {
+  Cashier,
+  CashierError,
+  CashierCreateDataInput,
+  CashierUpdateDataInput,
+  CashierParams
+} from "@deboxsoft/lc-cashier-api";
 
 import { Container, PageCursorResult } from "@deboxsoft/module-core";
-import { BaseRepository, getMongoDb, paginationCursor } from "@deboxsoft/module-mongo";
+import { BaseRepository, getMongoDb, paginationCursor, IDGeneratorNumberDate } from "@deboxsoft/module-mongo";
 
-export const createCashierRepo = () => {
+export const createCashierRepo = async () => {
   const db = getMongoDb();
   const cashierRepo = new CashierCollection(db);
+  const lastId = await cashierRepo.getLastId();
+  const idStrategy = new IDGeneratorNumberDate(lastId);
+  cashierRepo.setIdGeneratorStrategy(idStrategy);
   Container.set(CASHIER_REPO_KEY, cashierRepo);
   return cashierRepo;
 };
@@ -19,7 +28,7 @@ export class CashierCollection extends BaseRepository implements CashierRepo {
     this.collection = db.collection("Cashier");
   }
 
-  async create(input: CashierInput) {
+  async create(input: CashierCreateDataInput) {
     try {
       const metadata = await this.collection.insertOne(this._parseDataInput(input));
       if (metadata.result.ok === 1) {
@@ -34,7 +43,7 @@ export class CashierCollection extends BaseRepository implements CashierRepo {
     }
   }
 
-  async update(id, input: Partial<CashierInput>) {
+  async update(id, input: CashierUpdateDataInput) {
     const metadata = await this.collection.updateOne({ _id: id }, { $set: input });
     return { metadata, data: metadata.result.ok === 1 };
   }

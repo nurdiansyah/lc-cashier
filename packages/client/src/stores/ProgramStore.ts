@@ -1,16 +1,21 @@
-import type { PageCursorInfo } from "@deboxsoft/module-core";
-import type { Program, ProgramFilter, ProgramInput, ProgramParams } from "@deboxsoft/lc-cashier-api";
+import { Container, PageCursorInfo } from "@deboxsoft/module-core";
+import type {
+  Program,
+  ProgramCreateInput,
+  ProgramFilter,
+  ProgramParams,
+  ProgramUpdateInput
+} from "@deboxsoft/lc-cashier-api";
 import type { LcCashierClientConfig, ItemDataOptions, FindOptions } from "../types";
 
 import { createProgramService } from "../services";
 import { writable, get, Readable, Writable } from "svelte/store";
-import { getContext, setContext } from "svelte";
 
 interface Options extends LcCashierClientConfig {}
 
 export interface ProgramContext {
-  create(input: ProgramInput): Promise<void>;
-  update(id: string, input: ProgramInput, options?: ItemDataOptions): Promise<void>;
+  create(input: ProgramCreateInput): Promise<void>;
+  update(id: string, input: ProgramUpdateInput, options?: ItemDataOptions): Promise<void>;
   remove(id: string, options?: ItemDataOptions): Promise<void>;
   findById(id: string): Promise<Program | undefined>;
   find(filter?: ProgramFilter): Promise<Program[]>;
@@ -21,8 +26,11 @@ export interface ProgramContext {
 }
 const KEY = Symbol("program-context");
 export const createProgramContext = (options: Options): ProgramContext => {
+  if (Container.has(KEY)) {
+    return Container.get<ProgramContext>(KEY);
+  }
   const programService = createProgramService(options);
-  const programStore = writable<Program[]>([]);
+  const programStore = writable<Program[]>(undefined);
   const programPageInfo = writable<PageCursorInfo>({});
 
   // subscription
@@ -60,7 +68,7 @@ export const createProgramContext = (options: Options): ProgramContext => {
   const programContext: ProgramContext = {
     programStore,
     programPageInfo,
-    create: (input: ProgramInput): Promise<void> => {
+    create: (input: ProgramCreateInput): Promise<void> => {
       return programService.create(input).catch((reason) => {
         if (reason?.response?.errors[0]?.message) {
           const message = reason.response.errors[0].message;
@@ -69,7 +77,7 @@ export const createProgramContext = (options: Options): ProgramContext => {
         console.error(reason);
       });
     },
-    update: (id: string, input: ProgramInput, { index }: { index?: number } = {}): Promise<void> => {
+    update: (id: string, input: ProgramUpdateInput, { index }: { index?: number } = {}): Promise<void> => {
       return programService.update(id, input).catch((reason) => {
         if (reason?.response?.errors[0]?.message) {
           const message = reason.response.errors[0].message;
@@ -112,8 +120,10 @@ export const createProgramContext = (options: Options): ProgramContext => {
       return programArr[i];
     }
   };
-  setContext<ProgramContext>(KEY, programContext);
+  Container.set(KEY, programContext);
   return programContext;
 };
 
-export const getProgramContext = () => getContext<ProgramContext>(KEY);
+export const getProgramContext = () => {
+  return Container.get<ProgramContext>(KEY);
+};

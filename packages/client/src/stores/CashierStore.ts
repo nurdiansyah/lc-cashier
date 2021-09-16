@@ -1,5 +1,11 @@
 import type { PageCursorInfo } from "@deboxsoft/module-core";
-import type { Cashier, CashierFilter, CashierInput, CashierParams } from "@deboxsoft/lc-cashier-api";
+import type {
+  Cashier,
+  CashierCreateInput,
+  CashierFilter,
+  CashierParams,
+  CashierUpdateInput
+} from "@deboxsoft/lc-cashier-api";
 import type { LcCashierClientConfig, ItemDataOptions, FindOptions } from "../types";
 
 import { createCashierService } from "../services";
@@ -9,8 +15,8 @@ import { getContext, setContext } from "svelte";
 interface Options extends LcCashierClientConfig {}
 
 export interface CashierContext {
-  create(input: CashierInput): Promise<void>;
-  update(id: string, input: CashierInput, options?: ItemDataOptions): Promise<void>;
+  create(input: CashierCreateInput): Promise<void>;
+  update(id: string, input: CashierUpdateInput, options?: ItemDataOptions): Promise<void>;
   remove(id: string, options?: ItemDataOptions): Promise<void>;
   findById(id: string): Promise<Cashier | undefined>;
   find(filter?: CashierFilter): Promise<Cashier[]>;
@@ -60,7 +66,7 @@ export const createCashierContext = (options: Options): CashierContext => {
   const cashierContext: CashierContext = {
     cashierStore,
     cashierPageInfo,
-    create: (input: CashierInput): Promise<void> => {
+    create: (input: CashierCreateInput): Promise<void> => {
       return cashierService.create(input).catch((reason) => {
         if (reason?.response?.errors[0]?.message) {
           const message = reason.response.errors[0].message;
@@ -69,7 +75,7 @@ export const createCashierContext = (options: Options): CashierContext => {
         console.error(reason);
       });
     },
-    update: (id: string, input: CashierInput, { index }: { index?: number } = {}): Promise<void> => {
+    update: (id: string, input: CashierUpdateInput, { index }: { index?: number } = {}): Promise<void> => {
       return cashierService.update(id, input).catch((reason) => {
         if (reason?.response?.errors[0]?.message) {
           const message = reason.response.errors[0].message;

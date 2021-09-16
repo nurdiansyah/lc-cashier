@@ -15,6 +15,8 @@ export const createCashierSchema: GraphqlSchemaModule = () => {
         description: String
         debitAccount: String
         amount: Float
+        userId: String
+        discount: Int
         creditAccounts: [AccountAmount]
       }
 
@@ -24,8 +26,16 @@ export const createCashierSchema: GraphqlSchemaModule = () => {
         programId: String
         description: String
         debitAccount: String
+        amount: Float
         discount: Int
+        userId: String
         creditAccounts: [AccountAmountInput]
+      }
+
+      input CashierUpdateInput {
+        student: String
+        programId: String
+        description: String
       }
 
       type CashierPageResult {
@@ -50,13 +60,13 @@ export const createCashierSchema: GraphqlSchemaModule = () => {
 
       extend type Mutation {
         createCashier(input: CashierInput!): String
-        updateCashier(id: ID!, input: CashierInput!): Boolean
+        updateCashier(id: ID!, input: CashierUpdateInput!): Boolean
         removeCashier(id: ID!): Boolean
       }
 
       extend type Subscription {
         cashierCreated: Cashier
-        cashierUpdated: [Cashier]
+        cashierUpdated: Cashier
         cashierRemoved: ID!
       }
     `,

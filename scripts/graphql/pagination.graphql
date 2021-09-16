@@ -22,3 +22,11 @@ input PageCursorParams {
   after: String
   total: Int
 }
+
+fragment PageCursorInfoFragment on PageCursorInfo {
+  hasNext
+  hasPrevious
+  next
+  previous
+  total
+}

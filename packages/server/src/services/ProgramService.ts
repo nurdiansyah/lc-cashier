@@ -3,12 +3,14 @@ import { LcCashierModuleOptions } from "../types";
 import {
   ProgramError,
   ProgramEvent,
-  ProgramInput,
+  ProgramCreateInput,
+  ProgramUpdateInput,
   ProgramParams,
   ProgramService,
   Program,
   ProgramFilter,
-  ProgramInputSchema
+  ProgramCreateSchema,
+  ProgramUpdateSchema
 } from "@deboxsoft/lc-cashier-api";
 import { Container, Logger } from "@deboxsoft/module-core";
 import { getProgramRepo, ProgramRepo } from "../db";
@@ -32,9 +34,9 @@ export class ProgramServiceServer implements ProgramService {
     this.event = options.event;
   }
 
-  async create(input: ProgramInput) {
+  async create(input: ProgramCreateInput) {
     try {
-      input = ProgramInputSchema.parse(input);
+      input = ProgramCreateSchema.parse(input);
       const { data } = await this.programRepo.create(input);
       return this.findById(data).then((program) => {
         if (program) {
@@ -50,8 +52,9 @@ export class ProgramServiceServer implements ProgramService {
     }
   }
 
-  async update(id: string, input: Partial<ProgramInput>) {
+  async update(id: string, input: ProgramUpdateInput) {
     try {
+      input = ProgramUpdateSchema.parse(input);
       const { data } = await this.programRepo.update(id, input);
       return this.findById(id, { detail: false }).then((program) => {
         if (program) {

@@ -1,4 +1,10 @@
-import { Cashier, CashierFilter, CashierInput, CashierParams } from "@deboxsoft/lc-cashier-api";
+import {
+  Cashier,
+  CashierFilter,
+  CashierCreateInput,
+  CashierParams,
+  CashierUpdateInput
+} from "@deboxsoft/lc-cashier-api";
 import { FetchGraphql } from "@deboxsoft/module-graphql";
 import { SubscriptionClient } from "graphql-subscriptions-client";
 import { LcCashierClientConfig, ObserverSubscription } from "../types";
@@ -18,7 +24,7 @@ import { PageCursorResult } from "@deboxsoft/module-client";
 
 interface Options extends LcCashierClientConfig {}
 
-const createInputDefault: Partial<CashierInput> = {};
+const createInputDefault: Partial<CashierCreateInput> = {};
 let cashierService: CashierServiceClient;
 
 export const createCashierService = (options: Options) => {
@@ -39,14 +45,14 @@ export class CashierServiceClient implements CashierServiceClient {
     this.fetchGraphqlWS = fetchGraphqlWS;
   }
 
-  create(input: CashierInput) {
+  create(input: CashierCreateInput) {
     input = { ...createInputDefault, ...input };
     return this.fetchGraphql(CreateCashierMutation, { variables: { input } }).then((result) => {
       return result.createCashier;
     });
   }
 
-  update(id: string, input: CashierInput) {
+  update(id: string, input: CashierUpdateInput) {
     return this.fetchGraphql(UpdateCashierMutation, { variables: { id, input } }).then(
       (result) => result.updateCashier
     );
@@ -67,7 +73,7 @@ export class CashierServiceClient implements CashierServiceClient {
 
   findPage(params?: CashierParams): Promise<PageCursorResult<Cashier>> {
     return this.fetchGraphql(FindCashierPageQuery, { variables: { params } }).then(
-      (result) => result.findPageCashier || []
+      (result) => result.findCashierPage || []
     );
   }
 

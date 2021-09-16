@@ -1,7 +1,13 @@
 import { Collection, Db } from "mongodb";
 import { ProgramRepo } from "../ProgramRepo";
 import { PROGRAM_REPO_KEY } from "../ProgramRepo";
-import { Program, ProgramError, ProgramInput, ProgramParams } from "@deboxsoft/lc-cashier-api";
+import {
+  Program,
+  ProgramCreateDataInput,
+  ProgramError,
+  ProgramParams,
+  ProgramUpdateDataInput
+} from "@deboxsoft/lc-cashier-api";
 
 import { Container, PageCursorResult } from "@deboxsoft/module-core";
 import { BaseRepository, getMongoDb, paginationCursor } from "@deboxsoft/module-mongo";
@@ -20,7 +26,7 @@ export class ProgramCollection extends BaseRepository implements ProgramRepo {
     this.collection = db.collection("Program");
   }
 
-  async create(input: ProgramInput) {
+  async create(input: ProgramCreateDataInput) {
     try {
       const metadata = await this.collection.insertOne(this._parseDataInput(input));
       if (metadata.result.ok === 1) {
@@ -35,7 +41,7 @@ export class ProgramCollection extends BaseRepository implements ProgramRepo {
     }
   }
 
-  async update(id, input: ProgramInput) {
+  async update(id, input: ProgramUpdateDataInput) {
     const metadata = await this.collection.updateOne({ _id: id }, { $set: input });
     return { metadata, data: metadata.result.ok === 1 };
   }

@@ -3,6 +3,8 @@ import { gql, PageCursorInfoFragment } from "@deboxsoft/module-graphql";
 const ProgramFragment = gql`
   fragment ProgramFragment on Program {
     id
+    name
+    period
   }
 `;
 
@@ -47,12 +49,12 @@ export const FindProgramQuery = gql`
 `;
 
 export const FindProgramPageQuery = gql`
-  query find {
+  query findPage {
     findProgramPage {
       ...ProgramPageResultFragment
     }
   }
-  ${ProgramFragment}
+  ${ProgramPageResultFragment}
 `;
 
 export const FindProgramByIdQuery = gql`

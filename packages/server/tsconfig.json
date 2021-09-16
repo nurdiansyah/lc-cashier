@@ -3,11 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "types",
-    "emitDeclarationOnly": true,
-    "paths": {
-      "@deboxsoft/api/*": ["node_modules/@deboxsoft/lc-cashier-api/src/*"]
-    }
+    "emitDeclarationOnly": true
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules"]
 }

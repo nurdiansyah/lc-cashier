@@ -1,4 +1,10 @@
-import { Program, ProgramFilter, ProgramInput, ProgramParams } from "@deboxsoft/lc-cashier-api";
+import {
+  Program,
+  ProgramFilter,
+  ProgramCreateInput,
+  ProgramUpdateInput,
+  ProgramParams
+} from "@deboxsoft/lc-cashier-api";
 import { FetchGraphql } from "@deboxsoft/module-graphql";
 import { SubscriptionClient } from "graphql-subscriptions-client";
 import { LcCashierClientConfig, ObserverSubscription } from "../types";
@@ -18,7 +24,7 @@ import { PageCursorResult } from "@deboxsoft/module-client";
 
 interface Options extends LcCashierClientConfig {}
 
-const createInputDefault: Partial<ProgramInput> = {};
+const createInputDefault: Partial<ProgramCreateInput> = {};
 let programService: ProgramServiceClient;
 
 export const createProgramService = (options: Options) => {
@@ -39,14 +45,14 @@ export class ProgramServiceClient implements ProgramServiceClient {
     this.fetchGraphqlWS = fetchGraphqlWS;
   }
 
-  create(input: ProgramInput) {
+  create(input: ProgramCreateInput) {
     input = { ...createInputDefault, ...input };
     return this.fetchGraphql(CreateProgramMutation, { variables: { input } }).then((result) => {
       return result.createProgram;
     });
   }
 
-  update(id: string, input: ProgramInput) {
+  update(id: string, input: ProgramUpdateInput) {
     return this.fetchGraphql(UpdateProgramMutation, { variables: { id, input } }).then(
       (result) => result.updateProgram
     );
@@ -67,7 +73,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
 
   findPage(params?: ProgramParams): Promise<PageCursorResult<Program>> {
     return this.fetchGraphql(FindProgramPageQuery, { variables: { params } }).then(
-      (result) => result.findPageProgram || []
+      (result) => result.findProgramPage || []
     );
   }
 

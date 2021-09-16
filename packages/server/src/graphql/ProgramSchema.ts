@@ -10,14 +10,12 @@ export const createProgramSchema: GraphqlSchemaModule = () => {
       type Program {
         id: ID!
         name: String
-        discount: Int
-        price: Float
+        period: String
       }
 
       input ProgramInput {
         name: String
-        discount: Int
-        price: Float
+        period: String
       }
 
       type ProgramPageResult {
@@ -48,7 +46,7 @@ export const createProgramSchema: GraphqlSchemaModule = () => {
 
       extend type Subscription {
         programCreated: Program
-        programUpdated: [Program]
+        programUpdated: Program
         programRemoved: ID!
       }
     `,
