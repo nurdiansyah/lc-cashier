@@ -64,10 +64,10 @@ importers:
 
   packages/api:
     specifiers:
-      '@deboxsoft/accounting-api': ^1.3.0-beta.21
-      '@deboxsoft/module-core': ~2.2.11
+      '@deboxsoft/accounting-api': ^1.3.0-beta.38
+      '@deboxsoft/module-core': ~2.2.12
       '@deboxsoft/plop-generator': ^1.0.1-beta.15
-      '@deboxsoft/users-api': ^1.3.0-beta.11
+      '@deboxsoft/users-api': ^1.3.0-beta.14
       '@deboxsoft/zod': ^3.8.2
       '@nurdiansyah/bump': ^6.1.2
       '@nurdiansyah/rollup': ^1.6.8
@@ -86,10 +86,10 @@ importers:
     dependencies:
       mustache: 4.1.0
     devDependencies:
-      '@deboxsoft/accounting-api': 1.3.0-beta.22_e61d433ee7a0a8babd23a445c8ecd093
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/accounting-api': 1.3.0-beta.38_be437ef41d84cb59c08a821350831129
+      '@deboxsoft/module-core': 2.2.12
       '@deboxsoft/plop-generator': 1.0.1-beta.15
-      '@deboxsoft/users-api': 1.3.0-beta.11_250f6b9dc657bf3d09b3aa4da6cec929
+      '@deboxsoft/users-api': 1.3.0-beta.14_72984b407bed41582bf2bd27214f6e1c
       '@deboxsoft/zod': 3.8.2
       '@nurdiansyah/bump': 6.1.2
       '@nurdiansyah/rollup': 1.6.8_d87a9825cbc9e542ad494bbd4bbec189
@@ -108,9 +108,9 @@ importers:
   packages/client:
     specifiers:
       '@deboxsoft/lc-cashier-api': workspace:~
-      '@deboxsoft/module-client': ~2.2.4
-      '@deboxsoft/module-core': ~2.2.11
-      '@deboxsoft/module-graphql': ~2.2.10
+      '@deboxsoft/module-client': ~2.2.8
+      '@deboxsoft/module-core': ~2.2.12
+      '@deboxsoft/module-graphql': ~2.2.14
       '@deboxsoft/plop-generator': ^1.0.1-beta.15
       '@graphql-typed-document-node/core': ^3.1.0
       '@nurdiansyah/bump': ^6.1.2
@@ -133,9 +133,9 @@ importers:
       '@deboxsoft/lc-cashier-api': link:../api
       '@graphql-typed-document-node/core': 3.1.0_graphql@15.5.1
     devDependencies:
-      '@deboxsoft/module-client': 2.2.4_graphql@15.5.1
-      '@deboxsoft/module-core': 2.2.11
-      '@deboxsoft/module-graphql': 2.2.10_graphql@15.5.1
+      '@deboxsoft/module-client': 2.2.8_graphql@15.5.1
+      '@deboxsoft/module-core': 2.2.12
+      '@deboxsoft/module-graphql': 2.2.14_graphql@15.5.1
       '@deboxsoft/plop-generator': 1.0.1-beta.15
       '@nurdiansyah/bump': 6.1.2
       '@nurdiansyah/rollup': 1.6.8_d87a9825cbc9e542ad494bbd4bbec189
@@ -158,11 +158,11 @@ importers:
     specifiers:
       '@breejs/later': ^4.0.2
       '@changesets/cli': ^2.16.0
-      '@deboxsoft/accounting-server': ^1.3.0-beta.36
+      '@deboxsoft/accounting-server': ^1.3.0-beta.79
       '@deboxsoft/lc-cashier-api': workspace:~
-      '@deboxsoft/module-core': ~2.2.11
-      '@deboxsoft/module-graphql': ~2.2.10
-      '@deboxsoft/module-mongo': ~2.3.5
+      '@deboxsoft/module-core': ~2.2.12
+      '@deboxsoft/module-graphql': ~2.2.14
+      '@deboxsoft/module-mongo': ~2.3.12
       '@deboxsoft/module-server': ~2.2.8
       '@deboxsoft/plop-generator': ^1.0.1-beta.15
       '@graphql-tools/merge': 6.2.5
@@ -200,10 +200,10 @@ importers:
     devDependencies:
       '@breejs/later': 4.0.2
       '@changesets/cli': 2.16.0
-      '@deboxsoft/accounting-server': 1.3.0-beta.36_def4a0cf5d196d67ae0758c5b758562b
-      '@deboxsoft/module-core': 2.2.11
-      '@deboxsoft/module-graphql': 2.2.10_graphql@15.5.1
-      '@deboxsoft/module-mongo': 2.3.5_mongodb@3.6.11
+      '@deboxsoft/accounting-server': 1.3.0-beta.79_0e536eb4b75e1a38529ab2b296d07a98
+      '@deboxsoft/module-core': 2.2.12
+      '@deboxsoft/module-graphql': 2.2.14_graphql@15.5.1
+      '@deboxsoft/module-mongo': 2.3.12_mongodb@3.6.11
       '@deboxsoft/module-server': 2.2.8
       '@deboxsoft/plop-generator': 1.0.1-beta.15
       '@graphql-tools/merge': 6.2.5_graphql@15.5.1
@@ -1554,35 +1554,35 @@ packages:
     resolution: {integrity: sha512-RpfLEtTlyIxeNPGKcokS+p3BZII/Q3bYxryFRglh5H3A3T8q9fsLYm72VYAMEOOIBLEa8o93kFLiBDUWKrwXZA==}
     dev: true
 
-  /@deboxsoft/accounting-api/1.3.0-beta.22_c8e89ed67e325af35b627466929d709f:
-    resolution: {integrity: sha512-x25W3bYBUPIXczMbJyU5nqsN+kXqHPqHdlUVcFEEuUswxhWsOKp3pOspMdoZoZRFD6W0cAaVGbIRGdds6VgERA==}
+  /@deboxsoft/accounting-api/1.3.0-beta.38_9853499c3c4f41ec464b65d805c9e2d0:
+    resolution: {integrity: sha512-UI1ldGfFD+biBz8fISaqsV9SNbJ/jppTy+ifRUmpV1bBT77pMb0jfwomGYeLKNy+NiS7XvayNiO4YA/2b96jrg==}
     peerDependencies:
       '@deboxsoft/module-core': '*'
       '@deboxsoft/users-api': '*'
       dayjs: '*'
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/module-core': 2.2.12
       dayjs: 1.10.6
       mustache: 4.1.0
       performant-array-to-tree: 1.8.2
     dev: true
 
-  /@deboxsoft/accounting-api/1.3.0-beta.22_e61d433ee7a0a8babd23a445c8ecd093:
-    resolution: {integrity: sha512-x25W3bYBUPIXczMbJyU5nqsN+kXqHPqHdlUVcFEEuUswxhWsOKp3pOspMdoZoZRFD6W0cAaVGbIRGdds6VgERA==}
+  /@deboxsoft/accounting-api/1.3.0-beta.38_be437ef41d84cb59c08a821350831129:
+    resolution: {integrity: sha512-UI1ldGfFD+biBz8fISaqsV9SNbJ/jppTy+ifRUmpV1bBT77pMb0jfwomGYeLKNy+NiS7XvayNiO4YA/2b96jrg==}
     peerDependencies:
       '@deboxsoft/module-core': '*'
       '@deboxsoft/users-api': '*'
       dayjs: '*'
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
-      '@deboxsoft/users-api': 1.3.0-beta.11_250f6b9dc657bf3d09b3aa4da6cec929
+      '@deboxsoft/module-core': 2.2.12
+      '@deboxsoft/users-api': 1.3.0-beta.14_72984b407bed41582bf2bd27214f6e1c
       dayjs: 1.10.6
       mustache: 4.1.0
       performant-array-to-tree: 1.8.2
     dev: true
 
-  /@deboxsoft/accounting-server/1.3.0-beta.36_def4a0cf5d196d67ae0758c5b758562b:
-    resolution: {integrity: sha512-svKy1RYw0souaw/o/V3kP00IXq7VIyHAfYOTUkuYyKbEoUTCGv/byTPOCIIqutZuUWKIdx+XSna9HM5eZhuPBA==}
+  /@deboxsoft/accounting-server/1.3.0-beta.79_0e536eb4b75e1a38529ab2b296d07a98:
+    resolution: {integrity: sha512-sddPUUk0nEKYA+k9RqxdVGXl1JKEeOatDacDo3LCtE9sY1BuApdkVlNtbdHp3f2D2lcFXS8gLwJkah3+BUD68g==}
     peerDependencies:
       '@breejs/later': '*'
       '@deboxsoft/module-core': '*'
@@ -1602,10 +1602,10 @@ packages:
         optional: true
     dependencies:
       '@breejs/later': 4.0.2
-      '@deboxsoft/accounting-api': 1.3.0-beta.22_c8e89ed67e325af35b627466929d709f
-      '@deboxsoft/module-core': 2.2.11
-      '@deboxsoft/module-graphql': 2.2.10_graphql@15.5.1
-      '@deboxsoft/module-mongo': 2.3.5_mongodb@3.6.11
+      '@deboxsoft/accounting-api': 1.3.0-beta.38_9853499c3c4f41ec464b65d805c9e2d0
+      '@deboxsoft/module-core': 2.2.12
+      '@deboxsoft/module-graphql': 2.2.14_graphql@15.5.1
+      '@deboxsoft/module-mongo': 2.3.12_mongodb@3.6.11
       '@deboxsoft/module-server': 2.2.8
       '@graphql-tools/merge': 6.2.5_graphql@15.5.1
       '@graphql-tools/utils': 7.0.2_graphql@15.5.1
@@ -1620,23 +1620,23 @@ packages:
       - dayjs
     dev: true
 
-  /@deboxsoft/module-client/2.2.4_graphql@15.5.1:
-    resolution: {integrity: sha512-o19j8NG/1VUyHcfZtTpFoO6to6pZApCj5pKCBlkQRE7YjMbwQZ7MVzgcaKLfbK3PWuMOhzrBdBsxW5BVOqoktA==}
+  /@deboxsoft/module-client/2.2.8_graphql@15.5.1:
+    resolution: {integrity: sha512-Zs95E7QxuAeCgiVqMlpv7UciirS1GCaSbyy/fvOZtIEIqVlsKxBT7da6wZMxgGzrfv70DUDrnNlGCzkREIsnWQ==}
     peerDependencies:
       graphql: ^15.4.0
     peerDependenciesMeta:
       graphql:
         optional: true
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
-      '@deboxsoft/module-graphql': 2.2.10_graphql@15.5.1
+      '@deboxsoft/module-core': 2.2.12
+      '@deboxsoft/module-graphql': 2.2.14_graphql@15.5.1
       cross-fetch: 3.1.4
       graphql: 15.5.1
       nanoid: 3.1.25
     dev: true
 
-  /@deboxsoft/module-core/2.2.11:
-    resolution: {integrity: sha512-d64D21613iP480Pl9aFsxdE9NrmzmyABc4a40DX2rMMVWPMSxj6Mrzqjd7xSWB/1kO5/8fIy+rx70vYbUyBOhw==}
+  /@deboxsoft/module-core/2.2.12:
+    resolution: {integrity: sha512-13YuL56gvTCUz5dqyp0UXn2pYfy8e3ufrbL24IyEbkTc+FaYPaPVSFC0gTqIiu3XrTysyfYUVwDxTp0xeTVrzg==}
     dependencies:
       change-case: 4.1.2
       clone-deep: 4.0.1
@@ -1646,23 +1646,23 @@ packages:
       universal-base64: 2.1.0
     dev: true
 
-  /@deboxsoft/module-graphql/2.2.10_graphql@15.5.1:
-    resolution: {integrity: sha512-G1dzU1d1wX7CY0zOxfAL9TnuVtfWAiPhp3srM9Q44tywvBPi1bijZBF43pSe3tM+oubGSoriscufjKWzjnCdbQ==}
+  /@deboxsoft/module-graphql/2.2.14_graphql@15.5.1:
+    resolution: {integrity: sha512-M6drXalN5Es6yunbWWZQFQCvNQyynoUQc6x/qyK9aBw48wY8tLXw+nc7elSjynEm9AYrWV/2rL4qUyD64dfvXQ==}
     peerDependencies:
       graphql: ^15.4.0
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/module-core': 2.2.12
       graphql: 15.5.1
       graphql-request: 3.5.0_graphql@15.5.1
       graphql-subscriptions-client: 0.16.0
     dev: true
 
-  /@deboxsoft/module-mongo/2.3.5_mongodb@3.6.11:
-    resolution: {integrity: sha512-6chOaG77NW4NSgQMOqy1h5R958cXjPvYSROTx/3y2jxusdCZaHAzyx2ZlRKCrbPJ0aHCQF5accPTPxgMku5mAg==}
+  /@deboxsoft/module-mongo/2.3.12_mongodb@3.6.11:
+    resolution: {integrity: sha512-PgiC1tntJijvzsLtBDxLHjD/UxiWlg8QPvFaiQRRDxN1z3WcscoF5vtnof7wK5uEJK5DCQyHCKdaKFzkqk452w==}
     peerDependencies:
       mongodb: ^3.6.3
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/module-core': 2.2.12
       '@deboxsoft/module-server': 2.2.8
       bson: 4.4.1
       mongodb: 3.6.11_8c2da18c68f27cbc7fc6df8697c6866d
@@ -1671,7 +1671,7 @@ packages:
   /@deboxsoft/module-server/2.2.8:
     resolution: {integrity: sha512-jx+NKBkYdJB7yFJjN+gIwKq8DEKPUFJBfhx4na8WiBpxbemAW/Ba4BlBVUc9h3452Iitk52IrvyiNoidKaDiog==}
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/module-core': 2.2.12
       nanoid: 3.1.25
     dev: true
 
@@ -1680,7 +1680,7 @@ packages:
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/module-core': 2.2.12
       dotenv: 10.0.0
       edit-json-file: 1.6.0
       minimist: 1.2.5
@@ -1688,13 +1688,13 @@ packages:
       plop: 2.7.4
     dev: true
 
-  /@deboxsoft/users-api/1.3.0-beta.11_250f6b9dc657bf3d09b3aa4da6cec929:
-    resolution: {integrity: sha512-BWzUHruh2HVHVYBdrJPb/CujxaxKUJsPh7KGJvRgRGZ+TVDyhrJfutRFAQBI18+/l0vH41b0qX4Lo8ucZHjHpA==}
+  /@deboxsoft/users-api/1.3.0-beta.14_72984b407bed41582bf2bd27214f6e1c:
+    resolution: {integrity: sha512-wHmicXuh6zbVwSoB+jyOBpwlHpuplcKwHTnjDzD/iUja33basu9J3z4jbOP6z80Mz92oPSA9SvV/P150ndZSFA==}
     peerDependencies:
       '@deboxsoft/module-core': '*'
       '@deboxsoft/zod': '*'
     dependencies:
-      '@deboxsoft/module-core': 2.2.11
+      '@deboxsoft/module-core': 2.2.12
       '@deboxsoft/zod': 3.8.2
       mustache: 4.1.0
       notation: 2.0.0
