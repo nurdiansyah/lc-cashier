@@ -1,6 +1,6 @@
 {
   "name": "@deboxsoft/lc-cashier-client",
-  "version": "1.0.1-beta.12",
+  "version": "1.0.1-beta.13",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
@@ -44,9 +44,9 @@
     "@graphql-typed-document-node/core": "^3.1.0"
   },
   "devDependencies": {
-    "@deboxsoft/module-client": "~2.2.4",
-    "@deboxsoft/module-core": "~2.2.11",
-    "@deboxsoft/module-graphql": "~2.2.10",
+    "@deboxsoft/module-client": "~2.2.8",
+    "@deboxsoft/module-core": "~2.2.12",
+    "@deboxsoft/module-graphql": "~2.2.14",
     "@deboxsoft/plop-generator": "^1.0.1-beta.15",
     "@nurdiansyah/bump": "^6.1.2",
     "@nurdiansyah/rollup": "^1.6.8",
