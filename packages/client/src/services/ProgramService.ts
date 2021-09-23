@@ -20,29 +20,30 @@ import {
   ProgramUpdatedSubs,
   ProgramRemovedSubs
 } from "../graphql";
-import { PageCursorResult } from "@deboxsoft/module-client";
+import { Container, PageCursorResult } from "@deboxsoft/module-client";
 
 interface Options extends LcCashierClientConfig {}
 
 const createInputDefault: Partial<ProgramCreateInput> = {};
-let programService: ProgramServiceClient;
-
+const key = Symbol("cashier-service-client");
 export const createProgramService = (options: Options) => {
-  if (!programService) {
-    programService = new ProgramServiceClient(options);
+  if (Container.has(key)) {
+    return getProgramService();
   }
-  return programService;
+  const cashierService = new ProgramServiceClient(options);
+  Container.set(key, cashierService);
+  return cashierService;
 };
 
-export const getProgramService = () => programService;
+export const getProgramService = () => Container.get<ProgramServiceClient>(key);
 export class ProgramServiceClient implements ProgramServiceClient {
-  fetchGraphqlWS: SubscriptionClient;
+  subscriptionClient: SubscriptionClient;
   fetchGraphql: FetchGraphql;
   subscribers: any = {};
 
-  constructor({ fetchGraphql, fetchGraphqlWS }: Options) {
+  constructor({ fetchGraphql, createSubscriptionClient }: Options) {
     this.fetchGraphql = fetchGraphql;
-    this.fetchGraphqlWS = fetchGraphqlWS;
+    this.subscriptionClient = createSubscriptionClient();
   }
 
   create(input: ProgramCreateInput) {
@@ -79,7 +80,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
 
   onProgramCreated({ next, complete, error }: ObserverSubscription) {
     if (!this.subscribers.created) {
-      this.subscribers.created = this.fetchGraphqlWS
+      this.subscribers.created = this.subscriptionClient
         .request({
           query: ProgramCreatedSubs
         })
@@ -97,7 +98,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
 
   onProgramUpdated({ next, complete, error }: ObserverSubscription) {
     if (!this.subscribers.updated) {
-      this.subscribers.updated = this.fetchGraphqlWS
+      this.subscribers.updated = this.subscriptionClient
         .request({
           query: ProgramUpdatedSubs
         })
@@ -115,7 +116,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
 
   onProgramRemoved({ next, complete, error }: ObserverSubscription) {
     if (!this.subscribers.removed) {
-      this.subscribers.removed = this.fetchGraphqlWS
+      this.subscribers.removed = this.subscriptionClient
         .request({
           query: ProgramRemovedSubs
         })

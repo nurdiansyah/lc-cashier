@@ -12,7 +12,7 @@ export const ProgramEvent = {
 export const ProgramSchema = z.object({
   id: z.string(),
   name: z.string().min(1),
-  period: z.string().optional()
+  period: z.number()
 });
 export const ProgramCreateSchema = ProgramSchema.omit({ id: true });
 export const ProgramUpdateSchema = ProgramCreateSchema;

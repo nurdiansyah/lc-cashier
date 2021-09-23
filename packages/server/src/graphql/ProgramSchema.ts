@@ -10,12 +10,12 @@ export const createProgramSchema: GraphqlSchemaModule = () => {
       type Program {
         id: ID!
         name: String
-        period: String
+        period: Int
       }
 
       input ProgramInput {
         name: String
-        period: String
+        period: Int
       }
 
       type ProgramPageResult {

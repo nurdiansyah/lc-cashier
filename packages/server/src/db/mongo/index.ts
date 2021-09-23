@@ -2,10 +2,10 @@
 import { createProgramRepo } from "./ProgramCollection";
 import { createCashierRepo } from "./CashierCollection";
 
-export const registerLcCashierRepo = () => {
+export const registerLcCashierRepo = async () => {
   /* -- APPEND-REGISTER -- */
-  createProgramRepo();
-  createCashierRepo();
+  await createProgramRepo();
+  await createCashierRepo();
 };
 
 /* -- APPEND-COLLECTION -- */

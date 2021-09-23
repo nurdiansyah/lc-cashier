@@ -20,29 +20,31 @@ import {
   CashierUpdatedSubs,
   CashierRemovedSubs
 } from "../graphql";
-import { PageCursorResult } from "@deboxsoft/module-client";
+import { Container, PageCursorResult } from "@deboxsoft/module-client";
 
 interface Options extends LcCashierClientConfig {}
 
 const createInputDefault: Partial<CashierCreateInput> = {};
-let cashierService: CashierServiceClient;
 
+const key = Symbol("cashier-service-client");
 export const createCashierService = (options: Options) => {
-  if (!cashierService) {
-    cashierService = new CashierServiceClient(options);
+  if (Container.has(key)) {
+    return getCashierService();
   }
+  const cashierService = new CashierServiceClient(options);
+  Container.set(key, cashierService);
   return cashierService;
 };
 
-export const getCashierService = () => cashierService;
+export const getCashierService = () => Container.get<CashierServiceClient>(key);
 export class CashierServiceClient implements CashierServiceClient {
-  fetchGraphqlWS: SubscriptionClient;
+  subscriptionClient: SubscriptionClient;
   fetchGraphql: FetchGraphql;
   subscribers: any = {};
 
-  constructor({ fetchGraphql, fetchGraphqlWS }: Options) {
+  constructor({ fetchGraphql, createSubscriptionClient }: Options) {
     this.fetchGraphql = fetchGraphql;
-    this.fetchGraphqlWS = fetchGraphqlWS;
+    this.subscriptionClient = createSubscriptionClient();
   }
 
   create(input: CashierCreateInput) {
@@ -79,7 +81,7 @@ export class CashierServiceClient implements CashierServiceClient {
 
   onCashierCreated({ next, complete, error }: ObserverSubscription) {
     if (!this.subscribers.created) {
-      this.subscribers.created = this.fetchGraphqlWS
+      this.subscribers.created = this.subscriptionClient
         .request({
           query: CashierCreatedSubs
         })
@@ -97,7 +99,7 @@ export class CashierServiceClient implements CashierServiceClient {
 
   onCashierUpdated({ next, complete, error }: ObserverSubscription) {
     if (!this.subscribers.updated) {
-      this.subscribers.updated = this.fetchGraphqlWS
+      this.subscribers.updated = this.subscriptionClient
         .request({
           query: CashierUpdatedSubs
         })
@@ -115,7 +117,7 @@ export class CashierServiceClient implements CashierServiceClient {
 
   onCashierRemoved({ next, complete, error }: ObserverSubscription) {
     if (!this.subscribers.removed) {
-      this.subscribers.removed = this.fetchGraphqlWS
+      this.subscribers.removed = this.subscriptionClient
         .request({
           query: CashierRemovedSubs
         })

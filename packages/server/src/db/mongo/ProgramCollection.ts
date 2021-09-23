@@ -10,11 +10,14 @@ import {
 } from "@deboxsoft/lc-cashier-api";
 
 import { Container, PageCursorResult } from "@deboxsoft/module-core";
-import { BaseRepository, getMongoDb, paginationCursor } from "@deboxsoft/module-mongo";
+import { BaseRepository, getMongoDb, IDGeneratorSortNumber, paginationCursor } from "@deboxsoft/module-mongo";
 
-export const createProgramRepo = () => {
+export const createProgramRepo = async () => {
   const db = getMongoDb();
   const programRepo = new ProgramCollection(db);
+  const lastId = await programRepo.getLastId();
+  const idStrategy = new IDGeneratorSortNumber(lastId);
+  programRepo.setIdGeneratorStrategy(idStrategy);
   Container.set(PROGRAM_REPO_KEY, programRepo);
   return programRepo;
 };
