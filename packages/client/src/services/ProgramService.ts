@@ -91,7 +91,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
         });
     }
     return () => {
-      this.subscribers.created.unsubscribe();
+      this.subscribers.created?.unsubscribe();
       this.subscribers.created = undefined;
     };
   }
@@ -109,7 +109,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
         });
     }
     return () => {
-      this.subscribers.updated.unsubscribe();
+      this.subscribers.updated?.unsubscribe();
       this.subscribers.updated = undefined;
     };
   }
@@ -127,7 +127,7 @@ export class ProgramServiceClient implements ProgramServiceClient {
         });
     }
     return () => {
-      this.subscribers.removed.unsubscribe();
+      this.subscribers.removed?.unsubscribe();
       this.subscribers.removed = undefined;
     };
   }
