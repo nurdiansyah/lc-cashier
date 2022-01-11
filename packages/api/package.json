@@ -63,8 +63,8 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@deboxsoft/module-core": "*",
-    "@deboxsoft/users-api": "*",
+    "@deboxsoft/module-core": "^1.3.0 || ^1.3.0-beta.0",
+    "@deboxsoft/users-api": "^1.4.0 || ^1.4.0-beta.0",
     "dayjs": "*"
   },
   "preferUnplugged": true,

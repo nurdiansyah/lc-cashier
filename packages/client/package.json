@@ -66,19 +66,9 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@deboxsoft/module-client": "*",
-    "@deboxsoft/module-core": "*",
-    "@deboxsoft/module-graphql": "*",
-    "cross-fetch": "*",
-    "graphql": "^15.4.0",
-    "graphql-subscriptions-client": "*",
-    "svelte": "^3.31.0"
+    "@deboxsoft/module-client": "^2.3.0 || ^2.3.0-beta.0",
+    "@deboxsoft/module-core": "^2.3.0 || ^2.3.0-beta.0",
+    "@deboxsoft/module-graphql": "^2.3.0 || ^2.3.0-beta.0"
   },
-  "peerDependenciesMeta": {
-    "graphql": {
-      "optional": true
-    }
-  },
-  "preferUnplugged": true,
   "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
 }

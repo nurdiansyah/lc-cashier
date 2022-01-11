@@ -11,8 +11,7 @@ export const ProgramEvent = {
 //*********************************** Schema **********************************
 export const ProgramSchema = z.object({
   id: z.string(),
-  name: z.string().min(1),
-  period: z.number()
+  name: z.string().min(1)
 });
 export const ProgramCreateSchema = ProgramSchema.omit({ id: true });
 export const ProgramUpdateSchema = ProgramCreateSchema;

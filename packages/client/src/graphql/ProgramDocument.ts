@@ -4,7 +4,6 @@ const ProgramFragment = gql`
   fragment ProgramFragment on Program {
     id
     name
-    period
   }
 `;
 

@@ -80,22 +80,10 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@breejs/later": "*",
     "@graphql-tools/merge": "6.2.5",
     "@graphql-tools/utils": "7.0.2",
-    "day-js": "*",
-    "graphql": "^15.4.0",
     "mongodb": "^3.0.0",
     "mqemitter": "*"
   },
-  "peerDependenciesMeta": {
-    "graphql": {
-      "optional": true
-    },
-    "mongodb": {
-      "optional": true
-    }
-  },
-  "preferUnplugged": true,
   "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
 }

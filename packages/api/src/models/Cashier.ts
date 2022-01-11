@@ -69,7 +69,8 @@ export const transformCashierToTransactionInput = CashierCreateSchema.transform(
       accountId: input.debitAccount,
       amount,
       userId: input.userId,
-      creditAccounts: input.creditAccounts
+      creditAccounts: input.creditAccounts,
+      showJournal: true
     };
   }
 );
