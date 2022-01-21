@@ -1,6 +1,6 @@
 {
   "name": "@deboxsoft/lc-cashier-api",
-  "version": "1.0.1-beta.15",
+  "version": "1.0.1-beta.16",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
@@ -63,10 +63,10 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@deboxsoft/accounting-api": "~1.4.0 || ~1.4.0-beta.0",
-    "@deboxsoft/module-core": "~1.3.0 || ^1.3.0-beta.0",
-    "@deboxsoft/users-api": "~1.3.0 || ^1.3.0-beta.0",
-    "dayjs": "^1.10.0"
+    "@deboxsoft/accounting-api": "1.4.x",
+    "@deboxsoft/module-core": "2.3.x",
+    "@deboxsoft/users-api": "1.3.x",
+    "dayjs": "1.10.x"
   },
   "preferUnplugged": true,
   "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
