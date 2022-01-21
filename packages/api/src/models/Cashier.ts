@@ -12,6 +12,7 @@ export const CashierEvent = {
 //*********************************** Schema **********************************
 export const CashierSchema = z.object({
   id: z.string(),
+  no: z.string().nullish(),
   date: z.union([z.date(), z.number()]).nullish(),
   student: z.string().min(1),
   programId: z.string().nullish(),
@@ -70,7 +71,8 @@ export const transformCashierToTransactionInput = CashierCreateSchema.transform(
       amount,
       userId: input.userId,
       creditAccounts: input.creditAccounts,
-      showJournal: true
+      description: input.description,
+      no: input.no
     };
   }
 );

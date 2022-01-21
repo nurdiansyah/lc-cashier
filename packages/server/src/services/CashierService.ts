@@ -16,6 +16,7 @@ import {
 import { Container, Logger } from "@deboxsoft/module-core";
 import { getCashierRepo, CashierRepo } from "../db";
 import { getTransactionServiceServer, TransactionServiceServer } from "@deboxsoft/accounting-server";
+import { createSessionManager } from "@deboxsoft/module-mongo";
 
 interface Options extends LcCashierModuleOptions {}
 
@@ -42,8 +43,9 @@ export class CashierServiceServer implements CashierService {
   }
 
   async create(input: CashierCreateInput) {
+    const sessionManager = createSessionManager();
+    sessionManager.start();
     try {
-      this.transactionService.startTransaction();
       const transactionId = await this.transactionService.getId();
       const transactionInput = transformCashierToTransactionInput.parse({
         ...input,
@@ -55,7 +57,7 @@ export class CashierServiceServer implements CashierService {
       });
       const { data } = await this.cashierRepo.create(dataInput);
       await this.transactionService.create(transactionInput);
-      await this.transactionService.commitTransaction();
+      await sessionManager.commitTransaction();
       return this.findById(data).then((cashier) => {
         if (cashier) {
           this.event.emit({ topic: CashierEvent.created, data: cashier });
@@ -66,10 +68,10 @@ export class CashierServiceServer implements CashierService {
       });
     } catch (e) {
       this.logger.error("[CashierServiceServer] %o", e);
-      this.transactionService.rollbackTransaction();
+      sessionManager.rollbackTransaction();
       throw e;
     } finally {
-      this.transactionService.endTransaction();
+      sessionManager.end();
     }
   }
 
