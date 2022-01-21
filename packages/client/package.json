@@ -1,6 +1,6 @@
 {
   "name": "@deboxsoft/lc-cashier-client",
-  "version": "1.0.1-beta.18",
+  "version": "1.0.1-beta.19",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
@@ -44,13 +44,12 @@
     "@graphql-typed-document-node/core": "^3.1.0"
   },
   "devDependencies": {
-    "@deboxsoft/module-client": "~2.2.8",
-    "@deboxsoft/module-core": "~2.2.12",
-    "@deboxsoft/module-graphql": "~2.2.14",
+    "@deboxsoft/module-client": "~2.3.0",
+    "@deboxsoft/module-core": "~2.3.0",
+    "@deboxsoft/module-graphql": "~2.3.0",
     "@deboxsoft/plop-generator": "^1.0.1-beta.15",
     "@nurdiansyah/bump": "^6.1.2",
     "@nurdiansyah/rollup": "^1.6.8",
-    "ava": "^3.15.0",
     "cross-fetch": "^3.1.4",
     "graphql": "^15.4.0",
     "graphql-subscriptions-client": "^0.16.0",
@@ -66,9 +65,9 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@deboxsoft/module-client": "^2.3.0 || ^2.3.0-beta.0",
-    "@deboxsoft/module-core": "^2.3.0 || ^2.3.0-beta.0",
-    "@deboxsoft/module-graphql": "^2.3.0 || ^2.3.0-beta.0"
+    "@deboxsoft/module-client": "~2.3.0 || ~2.3.0-beta.0",
+    "@deboxsoft/module-core": "~2.3.0 || ~2.3.0-beta.0",
+    "@deboxsoft/module-graphql": "~2.3.0 || ~2.3.0-beta.0"
   },
   "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
 }
