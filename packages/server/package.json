@@ -1,6 +1,6 @@
 {
   "name": "@deboxsoft/lc-cashier-server",
-  "version": "1.0.1-beta.20",
+  "version": "1.0.1-beta.21",
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
@@ -78,9 +78,9 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@deboxsoft/accounting-server": "~1.4.0 || ~1.4.0-beta.0",
-    "mongodb": "^3.0.0",
-    "mqemitter": "~4.4.0"
+    "@deboxsoft/accounting-server": "1.4.x",
+    "mongodb": "3.x",
+    "mqemitter": "4.4.x"
   },
   "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
 }
