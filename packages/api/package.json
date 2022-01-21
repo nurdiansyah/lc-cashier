@@ -1,6 +1,6 @@
 {
   "name": "@deboxsoft/lc-cashier-api",
-  "version": "1.0.1-beta.14",
+  "version": "1.0.1-beta.15",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
@@ -43,11 +43,11 @@
     "mustache": "~4.1.0"
   },
   "devDependencies": {
-    "@deboxsoft/accounting-api": "^1.3.0-beta.52",
-    "@deboxsoft/module-core": "~2.2.12",
+    "@deboxsoft/accounting-api": "^1.4.0-beta.46",
+    "@deboxsoft/module-core": "~2.3.0",
     "@deboxsoft/plop-generator": "^1.0.1-beta.15",
     "@deboxsoft/users-api": "^1.3.0-beta.14",
-    "@deboxsoft/zod": "^3.8.2",
+    "@deboxsoft/zod": "^3.11.5",
     "@nurdiansyah/bump": "^6.1.2",
     "@nurdiansyah/rollup": "^1.6.8",
     "@types/mustache": "^4.1.1",
@@ -63,9 +63,10 @@
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
-    "@deboxsoft/module-core": "^1.3.0 || ^1.3.0-beta.0",
-    "@deboxsoft/users-api": "^1.4.0 || ^1.4.0-beta.0",
-    "dayjs": "*"
+    "@deboxsoft/accounting-api": "~1.4.0 || ~1.4.0-beta.0",
+    "@deboxsoft/module-core": "~1.3.0 || ^1.3.0-beta.0",
+    "@deboxsoft/users-api": "~1.3.0 || ^1.3.0-beta.0",
+    "dayjs": "^1.10.0"
   },
   "preferUnplugged": true,
   "gitHead": "b023f06cd22d9b5d6279f3930d90bbfc15186ab2"
